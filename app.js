@@ -1,8 +1,8 @@
+
 (function(){
   const root = document.documentElement;
   function $(id){ return document.getElementById(id); }
 
-  // === THEME ===
   function setMode(m){
     const btn = $('mode');
     if(m === 'auto'){ root.removeAttribute('data-theme'); if(btn) btn.textContent = 'Modo: auto'; }
@@ -20,27 +20,16 @@
     }
   }
 
-  // === DATA LOAD (local -> Pages -> raw) ===
   const PAGES_JSON = 'https://pfranciscojmugica-ui.github.io/Directorios/data.json';
   const RAW_JSON   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json';
 
   async function loadData(){
-    // 1) intenta local (si subiste data.json junto al HTML en Pages)
-    try {
-      const r1 = await fetch('data.json', {cache:'no-store'});
-      if (r1.ok) return await r1.json();
-    } catch(_) {}
-    // 2) intenta GitHub Pages directo (siempre que Pages esté activo)
-    try {
-      const r2 = await fetch(PAGES_JSON, {cache:'no-store'});
-      if (r2.ok) return await r2.json();
-    } catch(_) {}
-    // 3) fallback a raw.githubusercontent.com (CORS suele permitirlo)
+    try { const r1 = await fetch('data.json', {cache:'no-store'}); if (r1.ok) return await r1.json(); } catch(_) {}
+    try { const r2 = await fetch(PAGES_JSON, {cache:'no-store'}); if (r2.ok) return await r2.json(); } catch(_) {}
     const r3 = await fetch(RAW_JSON, {cache:'no-store'});
     return await r3.json();
   }
 
-  // === UI helpers ===
   function catClass(c){
     if (!c) return 'lineas';
     if (c.indexOf('24/7')>-1) return 'lineas';
@@ -82,7 +71,6 @@
       .sort((a,b)=>a.localeCompare(b,'es'));
     const fCategoria = $('fCategoria');
     if(!fCategoria) return;
-    // deja la primera opción ("Todas...") y borra las demás
     while (fCategoria.options.length > 1) fCategoria.remove(1);
     cats.forEach(c=>{ const o=document.createElement('option'); o.textContent=c; o.value=c; fCategoria.appendChild(o); });
   }
