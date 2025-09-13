@@ -21,7 +21,7 @@
   }
 
   const PAGES_JSON = 'data.json';
-  const RAW_JSON   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json';
+  const RAW_JSON   = '/data.json';
 
   async function loadData(){
     try { const r1 = await fetch('data.json', {cache:'no-store'}); if (r1.ok) return await r1.json(); } catch(_) {}
