@@ -20,7 +20,7 @@
     }
   }
 
-  const PAGES_JSON = 'https://pfranciscojmugica-ui.github.io/Directorios/data.json';
+  const PAGES_JSON = 'data.json';
   const RAW_JSON   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json';
 
   async function loadData(){
