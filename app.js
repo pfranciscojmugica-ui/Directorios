@@ -20,16 +20,24 @@
     }
   }
 
-  const PAGES_JSON = 'data.json';
-  const RAW_JSON   = '/data.json';
-
   async function loadData(){
-    try { const r1 = await fetch('data.json', {cache:'no-store'}); if (r1.ok) return await r1.json(); } catch(_) {}
-    try { const r2 = await fetch(PAGES_JSON, {cache:'no-store'}); if (r2.ok) return await r2.json(); } catch(_) {}
-    const r3 = await fetch(RAW_JSON, {cache:'no-store'});
-    return await r3.json();
+    const local = new URL('data.json', document.baseURI).href;
+    const pages = 'https://pfranciscojmugica-ui.github.io/Directorios/data.json';
+    const raw   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json';
+  
+    const cand = [local, pages, raw];
+    for (const url of cand){
+      try {
+        const res = await fetch(url, { cache:'no-store', headers:{ 'Accept':'application/json' } });
+        if (res.ok) return await res.json();
+        console.warn('[data.json] intento fallido:', url, res.status);
+      } catch (e) {
+        console.warn('[data.json] error al intentar:', url, e);
+      }
+    }
+    throw new Error('No se pudo cargar data.json desde ninguna ruta.');
   }
-
+  
   function catClass(c){
     if (!c) return 'lineas';
     if (c.indexOf('24/7')>-1) return 'lineas';
