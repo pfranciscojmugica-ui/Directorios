@@ -3,7 +3,7 @@
   --bg:#0b1220; --txt:#e5e7eb; --muted:#9ca3af; --panel:#0a0f1c; --ring:#2563eb;
   --card:#111827; --cardBorder:#1f2937;
   --c-lineas:#0369a1; --c-justicia:#5b21b6; --c-hosp:#f97316; --c-cjm:#059669; --c-uneme:#f59e0b;
-  --c-lineas-t:#ffffff; --c-justicia-t:#ffffff; --c-hosp-t:#111111; --c-cjm-t:#111111; --c-uneme-t:#111111;
+  --c-lineas-t:#ffffff; --c-justicia-t:#ffffff; --c-hosp-t:#111111; --c-cjm-t:#ffffff; --c-uneme-t:#111111;
   --link:#93c5fd;
 }
 :root[data-theme="light"]{
@@ -45,4 +45,36 @@ a{color:var(--link);text-decoration:underline}
 .kv{display:flex;gap:8px;line-height:1.55}
 .kv b{min-width:120px;display:inline-block}
 .mini{color:var(--muted);font-size:12px;margin-top:6px}
+.right{margin-left:auto}
 .toggle{margin-left:auto}
+
+/* === Emergencias (compacta y llamativa) === */
+.emerg { margin: 8px 0 18px; }
+.emerg .card{ 
+  display:block; 
+  border-left:8px solid var(--ring);
+  background:linear-gradient(180deg, rgba(37,99,235,0.10), rgba(37,99,235,0.04)) , var(--card);
+}
+.emerg .head{ display:flex; align-items:center; gap:10px; margin:6px 0 8px; }
+.emerg .icon{ font-size:18px; line-height:1; }
+.emerg h2{ margin:0; font-size:18px; }
+.emerg .cta911{
+  display:inline-block; margin:6px 0 10px; padding:8px 12px; border-radius:12px;
+  background:var(--ring); color:#fff; font-weight:900; text-decoration:none;
+  box-shadow:0 4px 14px rgba(37,99,235,0.35);
+}
+.elist{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 12px; }
+@media (max-width:700px){ .elist{ grid-template-columns:1fr; } }
+.eline{ 
+  display:flex; justify-content:space-between; align-items:center; gap:10px; 
+  padding:6px 10px; border:1px solid var(--cardBorder); border-radius:10px; 
+  background:var(--panel);
+  transition:transform .05s ease, box-shadow .1s ease;
+}
+.eline:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.2); }
+.ename{ font-weight:700; font-size:14px; }
+.enum a{
+  display:inline-block; font-weight:900; font-size:14px; 
+  background:var(--ring); color:#fff; text-decoration:none; 
+  border-radius:999px; padding:4px 10px;
+}
