@@ -3,7 +3,7 @@
   --bg:#0b1220; --txt:#e5e7eb; --muted:#9ca3af; --panel:#0a0f1c; --ring:#2563eb;
   --card:#111827; --cardBorder:#1f2937;
   --c-lineas:#0369a1; --c-justicia:#5b21b6; --c-hosp:#f97316; --c-cjm:#059669; --c-uneme:#f59e0b;
-  --c-lineas-t:#ffffff; --c-justicia-t:#ffffff; --c-hosp-t:#111111; --c-cjm-t:#ffffff; --c-uneme-t:#111111;
+  --c-lineas-t:#ffffff; --c-justicia-t:#ffffff; --c-hosp-t:#111111; --c-cjm-t:#111111; --c-uneme-t:#111111;
   --link:#93c5fd;
 }
 :root[data-theme="light"]{
@@ -45,5 +45,4 @@ a{color:var(--link);text-decoration:underline}
 .kv{display:flex;gap:8px;line-height:1.55}
 .kv b{min-width:120px;display:inline-block}
 .mini{color:var(--muted);font-size:12px;margin-top:6px}
-.right{margin-left:auto}
 .toggle{margin-left:auto}
