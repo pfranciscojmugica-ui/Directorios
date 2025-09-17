@@ -5,8 +5,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Directorio Salud Mental</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20250917"/>
 </head>
 <body>
   <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
@@ -14,7 +13,7 @@
     <span class="badge">CDMX primero</span>
     <button class="btn toggle" id="mode">Modo: auto</button>
   </div>
-  <p class="mini">Modo claro/oscuro · contraste alto · grid 3 columnas · categorías dinámicas desde JSON · sin tocar tus datos.</p>
+  <p class="mini">Modo claro/oscuro · contraste alto · grid 3 columnas · categorías dinámicas desde JSON · parser tolerante (no cambia tu archivo).</p>
 
   <div class="toolbar">
     <input id="q" type="search" placeholder="Buscar por institución, estado, teléfono, correo, dirección..." aria-label="Buscar"/>
@@ -22,7 +21,6 @@
     <select id="fCategoria" aria-label="Filtrar por categoría">
       <option value="">Todas las categorías</option>
     </select>
-    <script src="app.js" defer></script>
     <select id="orden" aria-label="Ordenar">
       <option value="estado">Ordenar: Estado → Localidad → Institución</option>
       <option value="institucion">Ordenar: Institución A → Z</option>
@@ -36,6 +34,6 @@
   <div class="section"><div class="section-title"><h2>Ayuda en estados</h2></div></div>
   <div id="gridEstados" class="grid"></div>
 
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20250917" defer></script>
 </body>
 </html>
