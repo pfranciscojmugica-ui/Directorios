@@ -24,11 +24,9 @@
     const local = new URL('data.json', document.baseURI).href;
     const pages = 'https://pfranciscojmugica-ui.github.io/Directorios/data.json';
     const raw   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json';
-  
-    const cand = [local, pages, raw];
-    for (const url of cand){
+    for (const url of [local, pages, raw]){
       try {
-        const res = await fetch(url, { cache:'no-store', headers:{ 'Accept':'application/json' } });
+        const res = await fetch(url, {cache:'no-store', headers:{'Accept':'application/json'}});
         if (res.ok) return await res.json();
         console.warn('[data.json] intento fallido:', url, res.status);
       } catch (e) {
