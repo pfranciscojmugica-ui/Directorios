@@ -20,22 +20,50 @@
     }
   }
 
+  function sanitizeJsonText(text){
+    if (!text) return text;
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    text = text
+      .replace(/\u00A0/g, ' ')
+      .replace(/\u202F/g, ' ')
+      .replace(/\u2007/g, ' ')
+      .replace(/\u200B/g, '')
+      .replace(/\u2060/g, '');
+    text = text.replace(/,\s*([}\]])/g, '$1');
+    return text;
+  }
+
+  async function fetchJsonTolerant(url){
+    const res = await fetch(url, {cache:'no-store', headers:{'Accept':'application/json'}});
+    const txt = await res.text();
+    try {
+      return JSON.parse(txt);
+    } catch (e1) {
+      try {
+        return JSON.parse(sanitizeJsonText(txt));
+      } catch (e2) {
+        console.warn('[JSON inválido incluso tras saneo]', url, e2);
+        throw e2;
+      }
+    }
+  }
+
   async function loadData(){
-    const local = new URL('data.json', document.baseURI).href;
-    const pages = 'https://pfranciscojmugica-ui.github.io/Directorios/data.json';
-    const raw   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json';
+    const local = new URL('data.json?v=' + Date.now(), document.baseURI).href;
+    const pages = 'https://pfranciscojmugica-ui.github.io/Directorios/data.json?v=' + Date.now();
+    const raw   = 'https://raw.githubusercontent.com/pfranciscojmugica-ui/Directorios/main/data.json?v=' + Date.now();
     for (const url of [local, pages, raw]){
       try {
-        const res = await fetch(url, {cache:'no-store', headers:{'Accept':'application/json'}});
-        if (res.ok) return await res.json();
-        console.warn('[data.json] intento fallido:', url, res.status);
+        const data = await fetchJsonTolerant(url);
+        if (Array.isArray(data)) return data;
+        console.warn('[data.json] no es array:', url);
       } catch (e) {
         console.warn('[data.json] error al intentar:', url, e);
       }
     }
     throw new Error('No se pudo cargar data.json desde ninguna ruta.');
   }
-  
+
   function catClass(c){
     if (!c) return 'lineas';
     if (c.indexOf('24/7')>-1) return 'lineas';
