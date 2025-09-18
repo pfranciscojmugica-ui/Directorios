@@ -146,7 +146,7 @@
         card.innerHTML = ''
           + `<h3>${d.institucion||''} <span class="tag ${cc}">${d.categoria||''}</span></h3>`
           + '<div class="meta">'
-          + (d.telefono? `<div class="kv"><b>Teléfono(s):</b> <span>${d.telefono}</span></div>` : '')
+          + (d.telefono? `<div class="kv"><b>Teléfono(s):</b> <a href="tel:${d.telefono}">${d.telefono}</a></div>` : '')
           + (emailsHtml? `<div class="kv"><b>Correo(s):</b> <span>${emailsHtml}</span></div>` : '')
           + (d.web? `<div class="kv"><b>Sitio web:</b> <span><a href="${d.web}" target="_blank" rel="noopener">${d.web}</a></span></div>` : '')
           + (d.direccion? `<div class="kv"><b>Dirección:</b> <span>${d.direccion}</span></div>` : '')
